@@ -1,0 +1,33 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /GLOnly-CI/
+	RewriteRule ^index\.php$ - [L]
+	RewriteCond $1 !^(index\.php|robots\.txt)
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ /GLOnly-CI/index.php/$1 [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header unset ETag
+	FileETag None
+	Header set X-Content-Type-Options "nosniff"
+	Header set X-DNS-Prefetch-Control "off"
+	Header set X-Frame-Options "sameorigin"
+	Header set X-XSS-Protection "1; mode=block"
+	<IfModule mod_setenvif.c>
+		BrowserMatch MSIE ie
+		Header set X-UA-Compatible "IE=Edge,chrome=1" env=ie
+	</IfModule>
+</IfModule>
+
+<IfModule mod_actions.c>
+	Action compile-sass /yll-ci/phpsass-compile.php
+	<IfModule mod_mime.c>
+		AddHandler compile-sass .sass .scss
+	</IfModule>
+</IfModule>
+
+<IfModule mod_deflate.c>
+	AddOutputFilter DEFLATE html php js css scss sass
+</IfModule>
