@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 9]><html lang="zh-tw" class="no-js lte-ie8" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if gt IE 8]><!--><html lang="zh-tw" class="no-js" xmlns="http://www.w3.org/1999/xhtml"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Test position.</title>
+	<link href="css/normalize.css" rel="stylesheet">
+	<style>
+		html, body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+			-webkit-text-size-adjust: none;
+			-moz-text-size-adjust: none;
+			-ms-text-size-adjust: none;
+		}
+
+		body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend,
+		input, textarea, p, blockquote, th, td, iframe {
+			font-family: "Helvetica Neue",HelveticaNeue,"Helvetica-Neue",Helvetica,"BBAlpha Sans",sans-serif;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			user-select: none;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			-webkit-touch-callout: none;
+			-webkit-user-drag: none;
+		}
+		
+		#origin {
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 5px 5px;
+			background-color: #000;
+		}
+		
+		.round-group {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			-webkit-transition: all 1s ease-in-out;
+		    -moz-transition: all 1s ease-in-out;
+		    -o-transition: all 1s ease-in-out;
+		    -ms-transition: all 1s ease-in-out;
+		    transition: all 1s ease-in-out;
+		}
+		
+		.round-container {
+			position: absolute;
+			width: 100px;
+			height: 50px;
+		}
+		
+		.pre-active {
+		}
+		
+		.active {
+			display: block;
+			opacity: 1;
+		}
+		
+		.bordered {
+			border: 1px solid #000;
+		}
+		
+		.red {
+			background-color: #FF0000;
+		}
+		
+		.blue {
+			background-color: #0000FF;
+		}
+		
+		.green {
+			background-color: #00FF00;
+		}
+		
+		.yellow {
+			background-color: #FFFF00;
+		}
+		
+		.purple {
+			background-color: #FF00FF;
+		}
+	</style>
+	
+	<script src="js/modernizr-2.6.1.min.js"></script>
+	<script src="js/html5shiv.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
+	<script>
+	var Point = function(x, y){
+		this.x = x;
+		this.y = y;
+	}
+	Point.prototype.setPoint = function(x, y){
+		this.x = x;
+		this.y = y;
+	};
+	
+	(function(window, undefined){
+		var document = window.document
+		  , $ = window.jQuery
+		  ;
+		$(function(){
+			var width = 600
+			  , height = 450
+			  , width_half = width / 2
+			  , height_half = height / 2
+			  , num = 5
+			  , ax = $('.round-group').width() / 2 - width_half
+			  , ay = 50
+			  , pi2 = Math.PI * 2
+			  , angle = pi2 / num
+			  , tan_angel_half = Math.tan(angle / 2)
+			  , cos_angle = Math.cos(angle)
+			  , sin_angle = Math.sin(angle)
+			  , pa = new Point( ax, ay)
+			  , po = new Point( ax + width_half, ay - width / ( 2 * tan_angel_half ) )
+			  , pc = new Point( ax + width_half, ay + height_half )
+			  , offset_left = width_half
+			  , offset_top = height_half
+			  , pt = pc
+			  , tx
+			  , ty
+			  , current_a = 0
+			  ;
+			// tangle for clockwise rotate.
+			$('#prev').on('click', function(e){
+				current_a += angle;
+				$('.round-group').css({
+					transform: 'rotate(' + current_a + 'rad)'
+				});
+			});
+			$('#next').on('click', function(e){
+				current_a -= angle;
+				$('.round-group').css({
+					transform: 'rotate(' + current_a + 'rad)'
+				});
+			});
+			$('.round-group').css({
+				"transform-origin": po.x + 'px ' + po.y + 'px'
+			});
+			$('#origin').css({
+				left: ( po.x - 5 ) + 'px',
+				top: ( po.y - 5 ) + 'px' 
+			});
+			console.log(po);
+			for(var i = 0; i<num; i++){
+				if( i!=0 ){
+					tx = ( pt.x - po.x ) * cos_angle - ( pt.y - po.y ) * sin_angle + po.x;
+					ty = ( pt.x - po.x ) * sin_angle + ( pt.y - po.y ) * cos_angle + po.y;
+					pt.setPoint(tx, ty);
+				}
+				console.log(pt);
+				$('#round-'+i).css({
+					width: width + 'px',
+					height: height + 'px',
+					left: ( pt.x - offset_left ) + 'px',
+					top: ( pt.y - offset_top ) + 'px',
+					transform: 'rotate(' + (angle * i).toString() + 'rad)'
+				});
+			}
+		});
+	})(this);
+	</script>
+</head>
+<body>
+	<div style="position:absolute;z-index:100;top:0;left:0">
+		<button id="next">Next</button><br>
+		<button id="prev">Prev</button>
+	</div>
+	<div class="round-group">
+		<div id="origin"></div>
+		<div id="round-0" class="round-container bordered red active"></div>
+		<div id="round-1" class="round-container bordered blue"></div>
+		<div id="round-2" class="round-container bordered yellow"></div>
+		<div id="round-3" class="round-container bordered green"></div>
+		<div id="round-4" class="round-container bordered purple"></div>
+	</div>
+</body>
+</html>
