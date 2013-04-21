@@ -11,7 +11,10 @@ header('Content-type: text/css');
 
 $cache_path = __DIR__ . '/css/cache/';
 $css_file = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['PATH_INFO'];
-$syntax = substr($css_file, -4, 4);
+$syntax = strtolower(substr($css_file, -4, 4));
+if( $syntax != 'scss' && $syntax != 'sass' ){
+	exit();
+}
 $style = isset($_GET['style']) ? $_GET['style'] : 'expanded';
 if(!is_string($style) || !in_array($style, array('expanded', 'nested', 'compact', 'compressed'))){
 	$style = 'expanded';
