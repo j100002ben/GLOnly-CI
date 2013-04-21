@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Test position.</title>
-	<link href="css/normalize.css" rel="stylesheet">
+	<link href="https://raw.github.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
 	<style>
 		html, body {
 			width: 100%;
@@ -30,16 +30,24 @@
 			-webkit-user-drag: none;
 		}
 		
+		body {
+			position: relative;
+		}
+		
 		#origin {
 			position: absolute;
 			width: 10px;
 			height: 10px;
 			border-radius: 5px 5px;
 			background-color: #000;
+			top: 0;
+			left: 0;
 		}
 		
 		.round-group {
 			position: relative;
+			top: 0;
+			left: 0;
 			width: 100%;
 			height: 100%;
 			-webkit-transition: all 1s ease-in-out;
@@ -51,8 +59,8 @@
 		
 		.round-container {
 			position: absolute;
-			width: 100px;
-			height: 50px;
+			top: 0;
+			left: 0;
 		}
 		
 		.pre-active {
@@ -88,10 +96,7 @@
 		}
 	</style>
 	
-	<script src="js/modernizr-2.6.1.min.js"></script>
-	<script src="js/html5shiv.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
 	<script>
 	var Point = function(x, y){
 		this.x = x;
@@ -107,13 +112,13 @@
 		  , $ = window.jQuery
 		  ;
 		$(function(){
-			var width = 600
-			  , height = 450
+			var width = 200
+			  , height = 150
 			  , width_half = width / 2
 			  , height_half = height / 2
-			  , num = 5
+			  , num = 3
 			  , ax = $('.round-group').width() / 2 - width_half
-			  , ay = 50
+			  , ay = 300
 			  , pi2 = Math.PI * 2
 			  , angle = pi2 / num
 			  , tan_angel_half = Math.tan(angle / 2)
@@ -131,25 +136,36 @@
 			  ;
 			// tangle for clockwise rotate.
 			$('#prev').on('click', function(e){
-				current_a += angle;
+				current_a += 1;
 				$('.round-group').css({
-					transform: 'rotate(' + current_a + 'rad)'
+					transform: 'rotate(' + current_a * angle + 'rad)'
 				});
 			});
 			$('#next').on('click', function(e){
-				current_a -= angle;
+				current_a -= 1;
 				$('.round-group').css({
-					transform: 'rotate(' + current_a + 'rad)'
+					transform: 'rotate(' + current_a * angle + 'rad)'
 				});
 			});
 			$('.round-group').css({
+				width: $('.round-group').css('width'),
+				height: $('.round-group').css('height'),
 				"transform-origin": po.x + 'px ' + po.y + 'px'
 			});
 			$('#origin').css({
 				left: ( po.x - 5 ) + 'px',
 				top: ( po.y - 5 ) + 'px' 
+				
+				/* Using translate
+				transform: 'translate(' + ( po.x - 5 ) + 'px,' + ( po.y - 5 ) + 'px)'
+				*/
 			});
 			console.log(po);
+			$('.round-container:lt(' + num + ')').css({
+				width: width + 'px',
+				height: height + 'px',
+				display: 'none'
+			});
 			for(var i = 0; i<num; i++){
 				if( i!=0 ){
 					tx = ( pt.x - po.x ) * cos_angle - ( pt.y - po.y ) * sin_angle + po.x;
@@ -158,13 +174,17 @@
 				}
 				console.log(pt);
 				$('#round-'+i).css({
-					width: width + 'px',
-					height: height + 'px',
 					left: ( pt.x - offset_left ) + 'px',
 					top: ( pt.y - offset_top ) + 'px',
 					transform: 'rotate(' + (angle * i).toString() + 'rad)'
+					
+					/* Using translate
+					transform: 'translate(' + ( pt.x - offset_left ) + 'px,' + ( pt.y - offset_top ) + 'px) '
+							 + 'rotate(' + (angle * i).toString() + 'rad)'
+					*/
 				});
 			}
+			$('.round-container').css('display','block');
 		});
 	})(this);
 	</script>
@@ -181,6 +201,7 @@
 		<div id="round-2" class="round-container bordered yellow"></div>
 		<div id="round-3" class="round-container bordered green"></div>
 		<div id="round-4" class="round-container bordered purple"></div>
+		<div id="round-5" class="round-container bordered"></div>
 	</div>
 </body>
 </html>

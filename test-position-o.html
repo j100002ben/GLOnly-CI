@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lte IE 7]><html lang="zh-tw" class="no-js lte-ie9 lte-ie8 lte-ie7" xmlns="http://www.w3.org/1999/xhtml"><![endif]-->
+<!--[if IE 8]><html class="no-js lte-ie9 lte-ie8 ie8" lang="zh-tw"> <![endif]-->
+<!--[if IE 9]><html class="no-js lte-ie9 ie9" lang="zh-tw"> <![endif]-->
+<!--[if gte IE 10]><!--><html lang="zh-tw" class="no-js" xmlns="http://www.w3.org/1999/xhtml"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>Test position.</title>
+	<link href="https://raw.github.com/necolas/normalize.css/master/normalize.css" rel="stylesheet">
+	<style>
+		html, body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+			-webkit-text-size-adjust: none;
+			-moz-text-size-adjust: none;
+			-ms-text-size-adjust: none;
+		}
+
+		body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend,
+		input, textarea, p, blockquote, th, td, iframe {
+			font-family: "Helvetica Neue",HelveticaNeue,"Helvetica-Neue",Helvetica,"BBAlpha Sans",sans-serif;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			user-select: none;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			-webkit-touch-callout: none;
+			-webkit-user-drag: none;
+		}
+		
+		body {
+			position: relative;
+		}
+		
+		#origin {
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			border-radius: 5px 5px;
+			background-color: #000;
+			top: 0;
+			left: 0;
+		}
+		
+		.no-transition {
+			-webkit-transition: none !important;
+			-moz-transition: none !important;
+			-o-transition: none !important;
+			-ms-transition: none !important;
+			transition: none !important;
+		}
+		
+		.round-group-parent {
+			position: relative;
+			top: 0;
+			left: 0;
+		}
+		
+		.round-group {
+			position: relative;
+			top: 0;
+			left: 0;
+			-webkit-transition: -webkit-transform 1s ease-in-out;
+			-moz-transition: -moz-transform 1s ease-in-out;
+			-o-transition: -o-transform 1s ease-in-out;
+			-ms-transition: -ms-transform 1s ease-in-out;
+			transition: transform 1s ease-in-out;
+		}
+		
+		.round-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		
+		.pre-active {
+		}
+		
+		.active {
+			display: block;
+			opacity: 1;
+		}
+		
+		.bordered {
+			border: 1px solid #000;
+		}
+		
+		.red {
+			background-color: #FF0000;
+		}
+		
+		.blue {
+			background-color: #0000FF;
+		}
+		
+		.green {
+			background-color: #00FF00;
+		}
+		
+		.yellow {
+			background-color: #FFFF00;
+		}
+		
+		.purple {
+			background-color: #FF00FF;
+		}
+		
+		.orange {
+			background-color: #FFA500;
+		}
+		
+		.brown {
+			background-color: #A52A2A;
+		}
+	</style>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+	<div style="position:absolute;z-index:100;top:0;left:0">
+		<button id="next">Next</button><br>
+		<button id="prev">Prev</button>
+	</div>
+	<div class="round-group-parent">
+		<div class="round-group">
+			<div id="origin"></div>
+			<div id="round-0" class="round-container bordered red active"></div>
+			<div id="round-1" class="round-container bordered blue"></div>
+			<div id="round-2" class="round-container bordered yellow"></div>
+			<div id="round-3" class="round-container bordered green"></div>
+			<div id="round-4" class="round-container bordered purple"></div>
+			<div id="round-5" class="round-container bordered orange"></div>
+			<div id="round-6" class="round-container bordered brown"></div>
+			<div id="round-7" class="round-container bordered blue"></div>
+			<div id="round-8" class="round-container bordered yellow"></div>
+			<div id="round-9" class="round-container bordered green"></div>
+			<div id="round-10" class="round-container bordered"></div>
+		</div>
+	</div>
+	<script>
+	(function(window, undefined){
+		var document = window.document
+		  , $ = window.jQuery
+		  , html_class = document.getElementsByTagName('html')[0].className
+		  , Point = function(x, y){
+				this.x = x;
+				this.y = y;
+			}
+		  ;
+		Point.prototype.setPoint = Point;
+		$.extend({
+			ieflag: {
+				normal: ! /lte-ie9/i.test(html_class),
+				ie9: /[^-]ie9/i.test(html_class),
+				ie8: /[^-]ie8/i.test(html_class),
+				lteie9: /lte-ie9/i.test(html_class),
+				lteie8: /lte-ie8/i.test(html_class),
+				lteie7: /lte-ie7/i.test(html_class)
+			}
+		});
+		$(function(){
+			var rotating = false
+			  , $group = $('.round-group')
+			  , width = 600
+			  , height = 500
+			  , width_half = width / 2
+			  , height_half = height / 2
+			  , num = 11
+			  , pi2 = Math.PI * 2
+			  , angle = pi2 / num
+			  , tan_angel_half = Math.tan(angle / 2)
+			  , cos_angle = Math.cos(angle)
+			  , sin_angle = Math.sin(angle)
+			  , po = new Point( 0, 0)
+			  , pc = new Point( 0, width / ( 2 * tan_angel_half ) + height_half )
+			  , offset_left = width_half
+			  , offset_top = height_half
+			  , pt = pc
+			  , tx
+			  , ty
+			  , current_a = 0
+			  , event_rotate = function(a){
+			  		var old_a = a
+			  		  , transitionend
+			  		  ;
+			  		rotating = true;
+					if( a >= num ) a -= num;
+					if( a <= -num ) a += num;
+					
+					transitionend = function(){
+			  			if( old_a != a ){
+							$group.addClass('no-transition').css('transform', 'rotate(' + a * angle + 'rad)' );
+						}
+			  			rotating = false;
+		  		  	}
+		  		  	
+		  		  	$group.removeClass('no-transition').css('transform', 'rotate(' + old_a * angle + 'rad)' );
+					if( $.ieflag.ie9 ){
+						setTimeout(transitionend, 1000)
+					}else{
+						$group.one('transitionend', transitionend);
+					}
+					return a;
+				}
+			  ;
+			$group.css({
+				"left": '50%',
+				"top": '-' + ( width / ( 2 * tan_angel_half ) - 50 ) + 'px',
+				"transform-origin": '0 0'
+			});
+			$('#prev').on('click', function(e){
+				if( rotating ) return ;
+				current_a = event_rotate(current_a + 1);
+			});
+			$('#next').on('click', function(e){
+				if( rotating ) return ;
+				current_a = event_rotate(current_a - 1);
+			});
+			$('#origin').css( 'transform', 'translate(' + ( po.x - 5 ) + 'px,' + ( po.y - 5 ) + 'px)' );
+			$('.round-container:lt(' + num + ')').css({
+				width: width + 'px',
+				height: height + 'px'
+			});
+			for(var i = 0; i<num; i++){
+				if( i!=0 ){
+					tx = ( pt.x - po.x ) * cos_angle - ( pt.y - po.y ) * sin_angle + po.x;
+					ty = ( pt.x - po.x ) * sin_angle + ( pt.y - po.y ) * cos_angle + po.y;
+					pt.setPoint(tx, ty);
+				}
+				$('#round-'+i).css('transform',
+					'translate(' + ( pt.x - offset_left ) + 'px,' + ( pt.y - offset_top ) + 'px) '
+				  + 'rotate(' + (angle * i).toString() + 'rad)'
+				);
+			}
+		});
+	})(this);
+	</script>
+</body>
+</html>
