@@ -196,23 +196,23 @@ body {
 	}
 	
 	> li.menu-events {
-		border-top: 5px solid #F00;
-	}
-	
-	> li.menu-rules {
 		border-top: 5px solid #0F0;
 	}
 	
-	> li.menu-circle {
-		border-top: 5px solid #00F;
+	> li.menu-rules {
+		border-top: 5px solid #F00;
 	}
 	
-	> li.menu-special {
+	> li.menu-circle {
 		border-top: 5px solid #0FF;
 	}
 	
+	> li.menu-special {
+		border-top: 5px solid #FF0;
+	}
+	
 	> li.menu-guestbook {
-		border-top: 5px solid #F0F;
+		border-top: 5px solid #00F;
 	}
 	
 	> li:first-child {
