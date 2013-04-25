@@ -24,7 +24,7 @@ class SassNumber extends SassLiteral {
    * Regx for matching and extracting numbers
    */
   const MATCH = '/^((?:-)?(?:\d*\.)?\d+)(([a-z%]+)(\s*[\*\/]\s*[a-z%]+)*)?/i';
-  // const MATCH = '/^(?!\d+px\/)((?:-)?(?:\d.)?\d+)(([a-z%]+)(\s[*\/]\s[a-z%]+))?/i';  
+  // const MATCH = '/^(?!\d+px\/)((?:-)?(?:\d.)?\d+)(([a-z%]+)(\s[*\/]\s[a-z%]+))?/i';
   const VALUE = 1;
   const UNITS = 2;
   /**
@@ -523,7 +523,7 @@ class SassNumber extends SassLiteral {
     if (!isset($this->units)) {
       $this->units = $this->getUnits();
     }
-    return ($this->units == 'px' ? floor($this->value) : round($this->value, self::PRECISION)) . $this->units;
+    return ($this->units == 'px' ? floor($this->value) : str_replace(',','.',round($this->value, self::PRECISION))) . $this->units;
   }
 
   /**
@@ -535,4 +535,26 @@ class SassNumber extends SassLiteral {
   public static function isa($subject) {
     return (preg_match(self::MATCH, $subject, $matches) ? $matches[0] : false);
   }
+
+    /**
+     * Returns the number of values of SassNumber
+     * @return int
+     */
+    public function length() {
+        return count($this->value);
+    }
+
+    /**
+     * Returns the nth value of the SassNumber
+     * @param int - the nth position of value
+     * @return SassBoolean|SassNumber
+     */
+    public function nth($i) {
+        $i = $i - 1; # SASS uses 1-offset arrays
+        if (isset($this->value)) {
+            return new SassNumber($this->value);
+        }
+        return new SassBoolean(false);
+    }
+
 }

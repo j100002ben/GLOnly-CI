@@ -64,7 +64,10 @@
 	
 }
 
-.justfont-badge {
+.text-replace {
+	overflow: hidden!important;
+	text-align: left!important;
+	text-indent: -9999px!important;
 }
 
 html, body {
@@ -111,7 +114,7 @@ body {
 #header {
 	position: absolute;
 	width: 100%;
-	height: 30px;
+	height: 40px;
 	top: 0;
 	left: 0;
 	z-index: 80;
@@ -126,6 +129,102 @@ body {
 #header-inner {
 	width: 100%;
 	height: 100%;
+}
+
+#title {
+	width: 100%;
+	height: 100%;
+	
+	h1, h2 {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		font-size: 16px;
+		white-space: nowrap;
+		overflow: hidden;
+		font-weight: bold;
+		color: #FFF;
+		text-decoration: none;
+		text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+	}
+	
+	h1 {
+		letter-spacing: 4px;
+		z-index: 91;
+	}
+	
+	h2 {
+		z-index: 90;
+	}
+}
+
+#title-inner {
+	position: relative;
+	margin: 0 auto;
+	width: 600px;
+	height: 40px;
+	line-height: 40px;
+}
+
+#social-link {
+	position: absolute;
+	top: 0;
+	right: 30px;
+	z-index: 100;
+	list-style: none;
+	margin: 0;
+	padding: 6px 0 0;
+	text-align: right;
+	box-sizing: border-box;
+	
+	&:hover > li{
+		opacity: 0.6;
+	}
+	
+	> li {
+		display: inline-block;
+		width; 24px;
+		height: 24px;
+		line-height: 24px;
+		margin-right: 6px;
+		-webkit-transition: opacity 0.3s ease-in-out;
+		-moz-transition: opacity 0.3s ease-in-out;
+		-o-transition: opacity 0.3s ease-in-out;
+		-ms-transition: opacity 0.3s ease-in-out;
+		transition: opacity 0.3s ease-in-out;
+		
+		&:hover {
+			opacity: 1;
+		}
+		
+		a {
+			display: block;
+			height: 24px;
+			width: 24px;
+			text-indent: -999999px;
+			text-decoration: none;
+			background-color: transparent;
+			background-image: url(../img/icon/social-icon-x24.png);
+			background-attachment: scroll;
+			background-repeat: no-repeat;
+		}
+		
+		a.facebook {
+			background-position: 0 0;
+		}
+		
+		a.plurk {
+			background-position: -24px 0;
+		}
+		
+		a.twitter {
+			background-position: -48px 0;
+		}
+		
+	}
 }
 
 #static {
@@ -216,6 +315,63 @@ body {
 			
 		}
 		
+		&.menu-events,
+		&.menu-events.active .list,
+		&.menu-events:hover .list {
+			border-top: 5px solid #0F0;
+		}
+		
+		&.menu-rules,
+		&.menu-rules.active .list,
+		&.menu-rules:hover .list {
+			border-top: 5px solid #F00;
+		}
+		
+		&.menu-circle,
+		&.menu-circle.active .list,
+		&.menu-circle:hover .list {
+			border-top: 5px solid #0FF;
+		}
+		
+		&.menu-special,
+		&.menu-special.active .list,
+		&.menu-special:hover .list {
+			border-top: 5px solid #FF0;
+		}
+		
+		&.menu-guestbook,
+		&.menu-guestbook.active .list,
+		&.menu-guestbook:hover .list {
+			border-top: 5px solid #00F;
+		}
+		
+		&:first-child {
+			margin-left: 0px;
+			.list{
+				border-right: 1px solid rgb(0,0,0);
+				border-left: 1px solid rgb(0,0,0);
+				border-right: 1px solid rgba(255,255,255,0);
+				border-left: 1px solid rgba(255,255,255,0);
+			}
+		}
+		
+		&.active, 
+		&:hover {
+			color: #000;
+			text-shadow: 
+				1px 1px 3px #FFF,
+				-1px 1px 3px #FFF,
+				1px -1px 3px #FFF,
+				-1px -1px 3px #FFF;
+			.list {
+				border-right: 1px solid rgb(128,128,128);
+				border-left: 1px solid rgb(128,128,128);
+				border-right: 1px solid rgba(255,255,255,0.5);
+				border-left: 1px solid rgba(255,255,255,0.5);
+				background-color: rgba(0,0,0,0.5);
+			}
+		}
+		
 		span {
 			display: block;
 			text-align: center;
@@ -243,63 +399,6 @@ body {
 		span.l1 {
 			font-family: wt014, "Microsoft JhengHei", "微軟正黑體", Arial;
 			font-weight: bold;
-		}
-	}
-	
-	> li.menu-events,
-	> li.menu-events.active .list,
-	> li.menu-events:hover .list {
-		border-top: 5px solid #0F0;
-	}
-	
-	> li.menu-rules,
-	> li.menu-rules.active .list,
-	> li.menu-rules:hover .list {
-		border-top: 5px solid #F00;
-	}
-	
-	> li.menu-circle,
-	> li.menu-circle.active .list,
-	> li.menu-circle:hover .list {
-		border-top: 5px solid #0FF;
-	}
-	
-	> li.menu-special,
-	> li.menu-special.active .list,
-	> li.menu-special:hover .list {
-		border-top: 5px solid #FF0;
-	}
-	
-	> li.menu-guestbook,
-	> li.menu-guestbook.active .list,
-	> li.menu-guestbook:hover .list {
-		border-top: 5px solid #00F;
-	}
-	
-	> li:first-child {
-		margin-left: 0px;
-		.list{
-			border-right: 1px solid rgb(0,0,0);
-			border-left: 1px solid rgb(0,0,0);
-			border-right: 1px solid rgba(255,255,255,0);
-			border-left: 1px solid rgba(255,255,255,0);
-		}
-	}
-	
-	> li.active, 
-	> li:hover {
-		color: #000;
-		text-shadow: 
-			1px 1px 3px #FFF,
-			-1px 1px 3px #FFF,
-			1px -1px 3px #FFF,
-			-1px -1px 3px #FFF;
-		.list {
-			border-right: 1px solid rgb(128,128,128);
-			border-left: 1px solid rgb(128,128,128);
-			border-right: 1px solid rgba(255,255,255,0.5);
-			border-left: 1px solid rgba(255,255,255,0.5);
-			background-color: rgba(0,0,0,0.5);
 		}
 	}
 }
@@ -348,25 +447,25 @@ body {
 		border-right: 1px solid rgb(255,255,255);
 		border-right: 1px solid rgba(255,255,255, 0.5);
 		
+		&:last-child {
+			margin-right: 100px;
+			border-right: 0px none;
+		}
+		
 		a {
 			color: #CCC;
 			text-shadow: 1px 1px #333;
 			text-decoration: none;
+			
+			&:hover {
+				color: #000;
+				text-shadow:
+					-1px -1px 1px #FFF,
+					1px -1px 1px #FFF,
+					-1px 1px 1px #FFF,
+					1px 1px 1px #FFF;
+				text-decoration: underline;
+			}
 		}
-		
-		a:hover {
-			color: #000;
-			text-shadow:
-				-1px -1px 1px #FFF,
-				1px -1px 1px #FFF,
-				-1px 1px 1px #FFF,
-				1px 1px 1px #FFF;
-			text-decoration: underline;
-		}
-	}
-	
-	li:last-child {
-		margin-right: 100px;
-		border-right: 0px none;
 	}
 }
