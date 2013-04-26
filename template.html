@@ -38,6 +38,23 @@
 			}
 		  , init_page = function(){
 		  		console.log('exec init page');
+		  		var menu_tap;
+		  		$(document).on('touchmove', function(e) { 
+					e.preventDefault();
+					e.stopPropagation();
+				});
+				$('#menu-list > li > div.list').on('touchstart', function(e){
+					menu_tap = true;
+					e.preventDefault();
+					e.stopPropagation();
+				}).on('touchend', function(e){
+					if( ! menu_tap ) return false;
+					menu_tap = false;
+					var $this = $(this);
+					$this.parent().toggleClass('tap');
+					e.preventDefault();
+					e.stopPropagation();
+				});
 			}
 		  , resize_window = function(){
 		  		var height = $(document.body).height();
@@ -98,7 +115,7 @@
 				<div id="menu">
 					<div id="menu-inner">
 						<ul id="menu-list">
-							<li class="menu-events active">
+							<li class="menu-events">
 								<div class="list"><span class="l0">活動資訊</span><span class="l1">Events</span></div>
 								<ul>
 									<li><a class="list" href=""><span class="l">活動資訊</span></a></li>
