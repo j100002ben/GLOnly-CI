@@ -338,7 +338,7 @@ body {
 		height: 100%;
 		margin-left: 5px;
 		white-space: nowrap;
-		width: 125px;
+		width: 135px;
 		box-sizing: border-box;
 		color: #EEE;
 		text-shadow: 
@@ -352,7 +352,7 @@ body {
 			position: absolute;
 			overflow: hidden;
 			z-index: 81;
-			width: 125px;
+			width: 135px;
 			list-style: none;
 			box-sizing: border-box;
 			background: rgba(0,0,0,0.75) url(../img/bg/greyfloral-invert.png) scroll repeat 50% 50%;
@@ -384,16 +384,16 @@ body {
 				&:hover {
 					color: #000;
 					text-shadow: 
-						1px 1px 3px #FFF,
-						-1px 1px 3px #FFF,
-						1px -1px 3px #FFF,
-						-1px -1px 3px #FFF;
+						1px 1px 2px #FFF,
+						-1px 1px 2px #FFF,
+						1px -1px 2px #FFF,
+						-1px -1px 2px #FFF;
 					> .list {
-						background-color: rgba(0,0,0,0.2);
+						background-color: rgba(0,0,0,0.4);
 					}
 					
 					span {
-						font-weight: bold;
+						font-weight: 300;
 					}
 				}
 				
@@ -405,7 +405,7 @@ body {
 				
 				span {
 					font-family: wt064;
-					font-weight: normal;
+					font-weight: 100;
 				}
 			}
 		}
@@ -460,7 +460,7 @@ body {
 		&.menu-guestbook,
 		&.menu-guestbook.active > .list,
 		&.menu-guestbook:hover > .list {
-			border-top: 5px solid #00F;
+			border-top: 5px solid #0080FF;
 		}
 		
 		&:first-child {
