@@ -49,7 +49,11 @@ try {
 		}else{
 			echo file_get_contents($cache_file);
 		}
-	}
+	}else{
+        include './phpsass/SassParser.php';
+        $parser = new SassParser($options);
+        echo $parser->toCss($css_file);
+    }
 } catch (Exception $e) {
 	echo $e->getMessage();	
 }
@@ -92,7 +96,7 @@ function getFunctions($extensions)
         foreach ($extensions as $extension) {
             $name = explode('/', $extension, 2);
             $namespace = ucwords(preg_replace('/[^0-9a-z]+/', '_', strtolower(array_shift($name))));
-            $extensionPath = './' . $namespace . '/' . $namespace . '.php';
+            $extensionPath = './phpsass/Extensions/' . $namespace . '/' . $namespace . '.php';
             if (file_exists(
                 $extensionPath
             )
@@ -104,6 +108,5 @@ function getFunctions($extensions)
             }
         }
     }
-
     return $output;
 }

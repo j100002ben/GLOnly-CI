@@ -64,6 +64,7 @@
 		window.ieflag = ieflag;
 		$.extend({ ieflag: ieflag });
 		$(function(){
+			var $plurk_box = $('#plurk-box');
 			resize_window();
 		  	$(window).resize(resize_window);
 			if( $.fn.jquery == '2.0.0' ){
@@ -110,6 +111,9 @@
 						
 					</div>
 				</div>
+				<div id="plurk-box">
+					<iframe src="http://www.plurk.com/getWidget?uid=9454703&amp;h=375&amp;w=250&amp;u_info=2&amp;bg=cf682f&tl=cae7fd" width="250" frameborder="0" height="375" scrolling="no"></iframe>
+				</div>
 			</div>
 		</div>
 		<div id="static">
@@ -119,7 +123,7 @@
 						<nav>
 						<header class="block-hide"><h5>Glonly 主選單</h5></header>
 						<ul id="menu-list">
-							<li class="menu-events">
+							<li class="menu-events active">
 								<div class="list"><span class="l0">活動資訊</span><span class="l1">Events</span></div>
 								<ul>
 									<li><a class="list" href=""><span class="l">活動資訊</span></a></li>
