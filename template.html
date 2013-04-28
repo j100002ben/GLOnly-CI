@@ -58,7 +58,11 @@
 			}
 		  , resize_window = function(){
 		  		var height = $(document.body).height();
-				
+				$('#body-inner').css({
+					top: '40px',
+					padding: '0',
+					height: ( height - 140 ) + "px"
+				});
 			}
 		  ;
 		window.ieflag = ieflag;
