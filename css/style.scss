@@ -113,6 +113,19 @@ body {
 	}
 }
 
+.lte-ie7 {
+	body {
+		text-align: center;
+		background: transparent url(../img/bg/whitediamond.png) scroll repeat 50% 100%;
+	}
+	#wrapper {
+		display: none;
+	}
+	#outdated-browser {
+		display: block;
+	}
+}
+
 .no-js {
 	
 }
@@ -139,6 +152,48 @@ body {
 	overflow: hidden;
 	position: relative;
 	background: transparent url(../img/bg/whitediamond.png) scroll repeat 50% 100%;
+}
+
+#outdated-browser {
+	display: none;
+	height: 600px;
+	width: 800px;
+	padding: 30px;
+	margin: 0 auto;
+	h1, h2 {
+		font-size: 16px;
+		margin: 15px 0;
+	}
+	h2 {
+		letter-spacing: 1px;
+	}
+	p {
+		margin: 15px 0;
+	}
+	a {
+		font-weight: bold;
+		color: #000;
+	}
+	div.message p {
+		color: red;
+		font-size: 14px;
+	}
+	div.info {
+		text-align: left;
+		width: 450px;
+		li {
+			margin: 5px 0;
+		}
+		p, li {
+			font-size: 12px;
+		}
+	}
+	p.copyright {
+		margin-top: 30px;
+		font-size: 12px;
+		color: #333;
+		letter-spacing: 1px;
+	}
 }
 
 #body {

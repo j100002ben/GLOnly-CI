@@ -20,9 +20,6 @@
 				$(this).parent().addClass('hover');
 			});
 		}
-	  , init_old_browser_page = function(){
-	  		
-		}
 	  , init_traditional_page = function(){
 	  		console.log('exec init traditional page');
 		}
@@ -56,7 +53,6 @@
 	window.ieflag = ieflag;
 	$.extend({ ieflag: ieflag });
 	$(function(){
-		var $plurk_box = $('#plurk-box');
 		resize_window();
 	  	$(window).resize(resize_window);
 		if( $.fn.jquery == '2.0.0' ){
@@ -64,6 +60,5 @@
 		}else{
 			init_traditional_page.call(this);
 		}
-	})
-	
+	});
 })(this);
