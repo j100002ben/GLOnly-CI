@@ -181,6 +181,7 @@ body {
 	opacity: 0.5;
 	overflow: hidden;
 	
+	&.hover,
 	&:hover {
 		height: 375px;
 		opacity: 1;
