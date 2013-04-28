@@ -58,10 +58,15 @@
 			}
 		  , resize_window = function(){
 		  		var height = $(document.body).height();
-				$('#body-inner').css({
-					top: '40px',
+				$('#body').css({
+					'margin-top': '40px',
 					padding: '0',
 					height: ( height - 140 ) + "px"
+				});
+				$('#static').css({
+					position: 'relative',
+					top: '0px',
+					bottom: 'auto'
 				});
 			}
 		  ;
