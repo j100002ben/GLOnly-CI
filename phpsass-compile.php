@@ -6,7 +6,8 @@
  *     Action compile-sass /git/phpsass/compile-apache.php
  *     AddHandler compile-sass .sass .scss
  */
-
+header('Server: ');
+header('X-Powered-By: ');
 header('Content-type: text/css');
 
 $cache_path = __DIR__ . '/css/cache/';
