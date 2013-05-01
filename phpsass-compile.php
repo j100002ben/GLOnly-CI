@@ -9,8 +9,9 @@
 header('X-Powered-By: phpsass');
 header('Content-type: text/css');
 
+$file_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $cache_path = __DIR__ . '/css/cache/';
-$css_file = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['PATH_INFO'];
+$css_file = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . $file_path;
 $syntax = strtolower(substr($css_file, -4, 4));
 if( $syntax != 'scss' && $syntax != 'sass' ){
 	exit();
@@ -19,7 +20,7 @@ $style = isset($_GET['style']) ? $_GET['style'] : 'expanded';
 if(!is_string($style) || !in_array($style, array('expanded', 'nested', 'compact', 'compressed'))){
 	$style = 'expanded';
 }
-$cache_file  = $cache_path . '/' . md5($_SERVER['PATH_INFO']) . ".{$syntax}.{$style}.css";
+$cache_file  = $cache_path . '/' . md5($file_path) . ".{$syntax}.{$style}.css";
 
 $options = array(
 	'style' => $style,
