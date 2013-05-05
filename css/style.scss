@@ -107,7 +107,7 @@ body {
 	
 	#footer-link {
 		li.last {
-			margin-right: 100px;
+			margin-right: 15px;
 			border-right: 0px none;
 		}
 	}
@@ -519,7 +519,7 @@ body {
 					}
 					
 					span {
-						font-weight: 300;
+						font-weight: bold;
 					}
 				}
 				
@@ -530,7 +530,7 @@ body {
 				}
 				
 				span {
-					font-family: wt064;
+					font-family: xingothic-tc-w4;
 					font-weight: 100;
 				}
 			}
@@ -614,6 +614,9 @@ body {
 				border-right: 1px solid rgba(255,255,255,0.5);
 				border-left: 1px solid rgba(255,255,255,0.5);
 				background-color: rgba(0,0,0,0.5);
+				> span {
+					font-weight: bold;
+				}
 			}
 		}
 		
@@ -637,8 +640,8 @@ body {
 			display: block;
 			text-align: center;
 			cursor: pointer;
-			font-family: wt014, "Microsoft JhengHei", "微軟正黑體", Arial;
-			font-weight: bold;
+			font-family: xingothic-tc-w6, "Microsoft JhengHei", "微軟正黑體", Arial;
+			font-weight: normal;
 		}
 		
 		span.l {
@@ -658,8 +661,6 @@ body {
 		}
 		
 		span.l1 {
-			font-family: wt014, "Microsoft JhengHei", "微軟正黑體", Arial;
-			font-weight: bold;
 		}
 	}
 }
@@ -709,7 +710,7 @@ body {
 		border-right: 1px solid rgba(255,255,255, 0.5);
 		
 		&:last-child {
-			margin-right: 100px;
+			margin-right: 15px;
 			border-right: 0px none;
 		}
 		
