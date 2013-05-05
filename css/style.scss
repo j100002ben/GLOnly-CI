@@ -733,12 +733,25 @@ body {
 	}
 }
 
+body.modal-body {
+	padding: 20px;
+}
+
+#modal-wrapper {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
 #modal-page {
+	
 	width: 100%;
 	height: 100%;
+	position: relative;
+	
 	font-family: xingothic-tc-w4, "Microsoft JhengHei", "微軟正黑體", Arial;
 	font-size: 13px;
-	padding: 0 20px;
+	
 	h3 {
 		width: 60%;
 		height: 40px;
@@ -748,8 +761,8 @@ body {
 		border-bottom: 1px solid #777;
 		margin: 0 auto 15px;
 	}
+	
 	div {
-		
 		p {
 			padding: 8px 0;
 		}
@@ -758,4 +771,19 @@ body {
 			font-weight: bold;
 		}
 	}
+}
+#modal-page-inner {
+	padding-right: 28px;
+}
+
+.scrollBarIndicatorV {
+	border-radius: 7px!important;
+	border: none!important;
+	opacity: 1!important;
+	background-color: rgba(0, 0, 0, 0.3)!important;
+	
+}
+
+.scrollBarV {
+	width: 14px!important;
 }

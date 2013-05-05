@@ -14,7 +14,18 @@
 	  , GLonly = {}
 	  ;
 	GLonly.resize_window = function(){
-  		var height = $(document.body).height();
+  		var height = $(document.body).height()
+  		  , iframeWin = $('.fancybox-iframe').get(0)
+  		  ;
+  		if( iframeWin !== undefined && iframeWin ){
+  			iframeWin.contentWindow.postMessage('resize-window', window.location.origin);
+  		}
+	};
+	GLonly.modal_loaded = function(){
+		var iframeWin = $('.fancybox-iframe').get(0);
+  		if( iframeWin !== undefined && iframeWin ){
+  			iframeWin.contentWindow.postMessage('modal-loaded', window.location.origin);
+  		}
 	};
 	GLonly.view = {
 		
@@ -79,7 +90,9 @@
 				width		: '70%',
 				height		: '70%',
 				autoSize	: false,
-				closeClick	: true
+				closeClick	: true,
+				afterShow	: GLonly.modal_loaded,
+				onUpdate	: GLonly.modal_loaded
 			});
 	  		e.preventDefault();
 			e.stopPropagation();
