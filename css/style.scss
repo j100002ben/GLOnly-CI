@@ -1,4 +1,5 @@
 @import "normalize";
+@import "jquery.fancybox";
 
 html, body {
 	width: 100%;
@@ -728,6 +729,33 @@ body {
 					1px 1px 1px #FFF;
 				text-decoration: underline;
 			}
+		}
+	}
+}
+
+#modal-page {
+	width: 100%;
+	height: 100%;
+	font-family: xingothic-tc-w4, "Microsoft JhengHei", "微軟正黑體", Arial;
+	
+	padding: 0 20px;
+	h3 {
+		width: 60%;
+		height: 30px;
+		line-height: 30px;
+		font-size: 14px;
+		text-align: center;
+		border-bottom: 1px solid #777;
+		margin: 0 auto 15px;
+	}
+	div {
+		
+		p {
+			padding: 8px 0;
+		}
+		em, strong {
+			font-family: xingothic-tc-w4, "Microsoft JhengHei", "微軟正黑體", Arial;
+			font-weight: bold;
 		}
 	}
 }

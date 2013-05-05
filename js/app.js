@@ -68,6 +68,23 @@
 	$(function(){
 		GLonly.resize_window();
 	  	$(window).resize(GLonly.resize_window);
+	  	$('a[rel="fancybox-iframe"]').click(function(e){
+	  		$.fancybox.open({
+				href : $(this).attr('href'),
+				type : 'iframe',
+				padding : 5,
+				maxWidth	: 800,
+				maxHeight	: 600,
+				fitToView	: false,
+				width		: '70%',
+				height		: '70%',
+				autoSize	: false,
+				closeClick	: true
+			});
+	  		e.preventDefault();
+			e.stopPropagation();
+	  		return false;
+	  	});
 		if( $.fn.jquery == '2.0.0' ){
 			GLonly.init.page.call(this);
 		}else{
