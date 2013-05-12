@@ -11,6 +11,28 @@ define('CSS_CACHE', TRUE);
 header('X-Powered-By: phpsass');
 header('Content-type: text/css');
 
+if( !function_exists('apache_request_headers') ) {
+    function apache_request_headers() {
+        $arh = array();
+        $rx_http = '/\AHTTP_/';
+        foreach($_SERVER as $key => $val) {
+            if( preg_match($rx_http, $key) ) {
+                $arh_key = preg_replace($rx_http, '', $key);
+                $rx_matches = array();
+                // do some nasty string manipulations to restore the original letter case
+                // this should work in most cases
+                $rx_matches = explode('_', $arh_key);
+                if( count($rx_matches) > 0 and strlen($arh_key) > 2 ) {
+                    foreach($rx_matches as $ak_key => $ak_val) $rx_matches[$ak_key] = ucfirst($ak_val);
+                    $arh_key = implode('-', $rx_matches);
+                }
+                $arh[$arh_key] = $val;
+            }
+        }
+        return( $arh );
+    }
+}
+
 $file_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $cache_path = __DIR__ . '/css/cache/';
 $css_file = rtrim($_SERVER['DOCUMENT_ROOT'], '/') . $file_path;
@@ -27,7 +49,6 @@ $cache_file  = $cache_path . '/' . md5($file_path) . ".{$syntax}.{$style}.css";
 // Execute the compiler.
 try {
 	if( CSS_CACHE ){
-        $headers = apache_request_headers();
         $modify_time = file_modify_time($cache_file);
 		if( file_modify_time($css_file) > $modify_time ){
 			include './phpsass/SassParser.php';
@@ -39,6 +60,7 @@ try {
             header('Last-Modified: '.gmdate('D, d M Y H:i:s', $modify_time).' GMT', true, 200);
 			echo $css;
 		}else{
+            $headers = apache_request_headers();
             if (isset($headers['If-Modified-Since']) && (strtotime($headers['If-Modified-Since']) == $modify_time)) {
                 header('Last-Modified: '.gmdate('D, d M Y H:i:s', $modify_time).' GMT', true, 304);
             }else{
@@ -127,26 +149,4 @@ function getFunctions($extensions)
         }
     }
     return $output;
-}
-
-if( !function_exists('apache_request_headers') ) {
-    function apache_request_headers() {
-        $arh = array();
-        $rx_http = '/\AHTTP_/';
-        foreach($_SERVER as $key => $val) {
-            if( preg_match($rx_http, $key) ) {
-                $arh_key = preg_replace($rx_http, '', $key);
-                $rx_matches = array();
-                // do some nasty string manipulations to restore the original letter case
-                // this should work in most cases
-                $rx_matches = explode('_', $arh_key);
-                if( count($rx_matches) > 0 and strlen($arh_key) > 2 ) {
-                    foreach($rx_matches as $ak_key => $ak_val) $rx_matches[$ak_key] = ucfirst($ak_val);
-                    $arh_key = implode('-', $rx_matches);
-                }
-                $arh[$arh_key] = $val;
-            }
-        }
-        return( $arh );
-    }
 }
