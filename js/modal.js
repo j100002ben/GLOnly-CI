@@ -1,3 +1,4 @@
+;"use strict";
 (function(window, undefined){
 	var document = window.document
 	  , $ = window.jQuery

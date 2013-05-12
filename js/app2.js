@@ -1,6 +1,8 @@
+;"use strict";
 (function(window, undefined){
 	var document = window.document
 	  , $ = window.jQuery
+	  , Raphael = window.Raphael
 	  , html_class = document.getElementsByTagName('html')[0].className
 	  , ieflag = {
 			normal: ! /lte-ie9/i.test(html_class),
@@ -47,12 +49,109 @@
 					e.preventDefault();
 					e.stopPropagation();
 				});
+				GLonly.init.draw_line.call(this);
 				if(ieflag.ie){
 					GLonly.init.ie_page.call(this);
 				}
 			},
 		traditional_page: function(){
 		  		console.log('exec init traditional page');
+			},
+		draw_line: function(){
+				var $d = $('#drawings-group-inner')
+				  , width = $d.width()
+				  , height = $d.height()
+				  , half_width = width / 2
+				  , canvas = Raphael("drawings-group-inner", width, height)
+				  , start_point = ['M', half_width, 265]
+				  , left_start_point = ['M', half_width - 250, 265]
+				  , left_points = []
+				  , left_bottom_points = []
+				  , right_start_point = ['M', half_width + 250, 265]
+				  , right_points = []
+				  , right_bottom_points = []
+				  ;	
+				left_bottom_points.push({
+					point: left_start_point,
+					time: 1000,
+					delay: 700
+				});
+				left_bottom_points.push({
+					point: ['M', half_width - 250, 400],
+					time: 1000
+				});
+				left_points.push({
+					point: start_point,
+					time: 1000
+					});
+				left_points.push({
+					point: ['L', half_width - 350, 265],
+					time: 1000
+					});
+				left_points.push({
+					point: ['L', half_width - 350, 190],
+					time: 1000
+					});
+				
+				right_bottom_points.push({
+					point: right_start_point,
+					time: 1000,
+					delay: 700
+				});
+				right_bottom_points.push({
+					point: ['M', half_width + 250, 400],
+					time: 1000
+				});
+				right_points.push({
+					point: start_point,
+					time: 1000
+					});
+				right_points.push({
+					point: ['L', half_width + 350, 265],
+					time: 1000
+					});
+				right_points.push({
+					point: ['L', half_width + 350, 190],
+					time: 1000
+					});
+				
+				var left_paths = []
+				  , left_bottom_paths = []
+				  , right_paths = []
+				  , right_bottom_paths = []
+				  ;
+				var point_animate_seq = function(paths, points, i){
+					if( i >= points.length - 1) return ;
+					if( points[i].delay !== undefined && points[i].delay ){
+						setTimeout(function(){
+							point_animate_seq(paths, points, i);
+						}, points[i].delay);
+						delete points[i].delay;
+						return ;
+					}
+					var a = points[i].point
+					  , b = points[i+1].point
+					  ;
+					a[0] = 'M';
+					b[0] = 'L';
+					paths[i] = canvas.path(a);
+					paths[i].attr({
+						stroke: '#CCC', 
+						opacity: 0.5,
+						"stroke-width": 8,
+						"stroke-linecap": 'round',
+						"stroke-linejoin": 'round',
+						"stroke-dasharray": '-'
+						});
+					paths[i].animate( { path: [a, b] } , points[i].time, function(){
+						point_animate_seq(paths, points, i+1);
+					} );
+					return ;
+				};
+				point_animate_seq(left_paths, left_points, 0);
+				point_animate_seq(left_bottom_paths, left_bottom_points, 0);
+				point_animate_seq(right_paths, right_points, 0);
+				point_animate_seq(right_bottom_paths, right_bottom_points, 0);
 			},
 		ie_page: function(){
 		  		
