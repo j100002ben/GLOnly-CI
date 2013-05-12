@@ -13,32 +13,32 @@
 		}
 	  ;
 	$(function(){
-		var tjscroll = false, adding = false;
+		var tjscroll
+		  , $modal = $('#modal-page')
+		  , refresh_scroll = function(){
+		  		tjscroll.refresh.call(tjscroll);
+			}
+		  ;
+		$(document).on('touchmove', function(e) { 
+			e.preventDefault();
+			e.stopPropagation();
+		});
 		$(window).on('message', function(e){
 			var event = e.originalEvent;
 			if (event.origin !== window.location.origin) return;
 			if( event.data == 'modal-loaded' ){
-				var $modal = $('#modal-page');
-				if( ! tjscroll ){
-					if( adding ) return ;
-					adding = true;
-					$('body').css('overflow','hidden');
-					setTimeout(function(){
-						$modal.TJScroll({
-							enabled:true,
-							hScroll:false,
-							vScroll:true,
-							hScrollbar:false,
-							vScrollbar:true,
-							bounceLock: true
-						});
-						tjscroll = $modal.data('TJScroll');
-					}, 0);
-				}else{
-					tjscroll.refresh.call(tjscroll);
-				}
+				refresh_scroll.call();
 			}
+		}).resize(refresh_scroll);
+		$modal.TJScroll({
+			enabled:true,
+			hScroll:false,
+			vScroll:true,
+			hScrollbar:false,
+			vScrollbar:true,
+			bounceLock: true
 		});
+		tjscroll = $modal.data('TJScroll');
 	});
 	
 	$.extend({ ieflag: ieflag });
