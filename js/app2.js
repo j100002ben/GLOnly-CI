@@ -17,10 +17,29 @@
 	  ;
 	GLonly.resize_window = function(){
   		var height = $(document.body).height()
+  		  , $body = $('#body')
+  		  , $header = $('#header')
   		  , iframeWin = $('.fancybox-iframe').get(0)
+  		  , scale
+  		  , y
   		  ;
   		if( iframeWin !== undefined && iframeWin ){
   			iframeWin.contentWindow.postMessage('resize-window', window.location.origin);
+  		}
+  		if( height < 650 ) {
+  			scale = height / 650;
+  			y = ( 650 - height ) / 2 * scale;
+  			$body.css({
+  				transform: "translate(0,-" + y + "px) scale(" + scale + "," + scale + ")"
+  			});
+  			y = y * 0.9 - 29.5;
+  			$header.css({
+  				transform: "translate(0,-" + y + "px) scale(" + scale + "," + scale + ")"
+  			});
+  		} else {
+  			$body.add($header).css({
+  				transform: "translate(0,0) scale(1,1)"
+  			});
   		}
 	};
 	GLonly.modal_loaded = function(){
