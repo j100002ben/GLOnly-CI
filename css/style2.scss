@@ -73,7 +73,7 @@ body {
 .lte-ie7 {
 	body {
 		text-align: center;
-		background: transparent url(../img/bg/whitediamond.png) scroll repeat 50% 100%;
+		background: transparent url(../img/bg2.png) scroll repeat 50% 100%;
 	}
 	#wrapper {
 		display: none;
@@ -182,6 +182,19 @@ body {
 	left: -125px;
 	width: 250px;
 	height: 295px;
+}
+
+#center-logo {
+	position: absolute;
+	background: transparent url(../img/icon/favicon-57.png) scroll no-repeat 0 0;
+	top: 195px;
+	left: 20px;
+	width: 57px;
+	height: 57px;
+	opacity: 0.4;
+	transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
 }
 
 #menu-list {
