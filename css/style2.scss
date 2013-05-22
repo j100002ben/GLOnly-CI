@@ -212,7 +212,7 @@ body {
 		margin: 0;
 		padding: 0;
 		text-align: center;
-		border-top: 5px solid rgba(255,255,255,0);
+		border-bottom: 5px solid rgba(255,255,255,0);
 		margin-right: 15px;
 		
 		> a.list {
@@ -237,7 +237,7 @@ body {
 		}
 		
 		&.event-info {
-			border-top: 5px solid red;
+			border-bottom: 5px solid red;
 			
 			&.active,
 			&:hover {
@@ -246,7 +246,7 @@ body {
 		}
 		
 		&.event-ticket {
-			border-top: 5px solid orange;
+			border-bottom: 5px solid orange;
 			
 			&.active,
 			&:hover {
@@ -255,7 +255,7 @@ body {
 		}
 		
 		&.event-area {
-			border-top: 5px solid blue;
+			border-bottom: 5px solid blue;
 			
 			&.active,
 			&:hover {
@@ -285,7 +285,8 @@ body {
 		border-bottom: 2px solid #ffb700;
 		width: 70%;
 		text-align: center;
-		font-family: xingothic-tc-w4, "Microsoft JhengHei", "微軟正黑體", Arial;
+		font-family: xingothic-tc-w6, "Microsoft JhengHei", "微軟正黑體", Arial;
+		font-size: 1.5em;
 		color: #EEE;
 		text-shadow: 
 			1px 1px 3px #222,
@@ -323,7 +324,7 @@ body {
 }
 
 .page-body-wrapper {
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255,255,255,0.9);
 	width: 100%;
 	height: 100%;
 	border: 4px solid rgba(0,0,0,0.65);
@@ -353,7 +354,7 @@ body {
 	.page-content-inner {
 		width: 100%;
 		height: 100%;
-		background-color: transparent;
+		background-color: rgba(255,255,255,0.5);
 	}
 	
 	.page-container {
