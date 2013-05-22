@@ -30,21 +30,14 @@ body {
 	cursor: default;
 }
 
-.jf-loading {
-	
+.js {
 	#header, #menu-group{
 		opacity: 0;
 	}
 }
 
-.jf-active {
+.jf-finish {
 	#header, #menu-group{
-		-webkit-transition: all 1s ease-in-out;
-		-moz-transition: all 1s ease-in-out;
-		-o-transition: all 1s ease-in-out;
-		-ms-transition: all 1s ease-in-out;
-		transition: all 1s ease-in-out;
-		
 		opacity: 1;
 	}
 }
@@ -106,9 +99,10 @@ body {
 #wrapper {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 	position: relative;
+	top: 0;
 	background: transparent url(../img/bg2.png) scroll repeat 50% 50%;
+	
 }
 
 #header {
@@ -116,6 +110,11 @@ body {
 	top: 10%;
 	width: 100%;
 	text-align: center;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	-ms-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
 	
 	h1 {
 		font-size: 1.3em;
@@ -158,8 +157,92 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 80;
+	left: -100%;
+}
+
+.page-content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
 	
-	display: none;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	-ms-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
+	
+	&.static {
+		opacity: 1;
+	}
+}
+
+.page-content-inner {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.5);
+}
+
+.page-container {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.page-header {
+	position: absolute;
+	top: 0;
+	padding: 10px 0;
+	width: 100%;
+	height: 80px;
+	
+	h3 {
+		margin: 0 auto;
+		letter-spacing: 5px;
+		padding: 5px 0;
+		border-bottom: 2px solid #ffb700;
+		width: 70%;
+		text-align: center;
+		font-family: xingothic-tc-w4, "Microsoft JhengHei", "微軟正黑體", Arial;
+		color: #EEE;
+		text-shadow: 
+			1px 1px 3px #222,
+			-1px 1px 3px #222,
+			1px -1px 3px #222,
+			-1px -1px 3px #222;
+	}
+}
+
+.page-body {
+	height: 100%;
+	width: 100%;
+	padding: 80px 30px 40px;
+}
+
+.page-body-inner {
+	background-color: rgba(255,255,255,0.8);
+	width: 100%;
+	height: 100%;
+	border: 4px solid rgba(0,0,0,0.65);
+	border-radius: 10px;
+	padding: 15px;
+	line-height: 1.8em;
+	letter-spacing: 0.25em;
+	overflow: hidden;
+	position: relative;
+}
+
+#event-page {
+	border-bottom: 3px solid rgba(0,0,0, 0.8);
+	background: transparent url(../img/bg/menu1.jpg) scroll no-repeat 50% 50%;
+	background-size: cover;
+	
+	.page-container {
+		position: relative;
+		left: 10%;
+		top: 0%;
+		width: 500px;
+		height: 100%;
+		box-shadow: 0px 0px 12px 4px rgba(20%,20%,40%,0.5);
+	}
 }
 
 #menu-group {
@@ -167,7 +250,11 @@ body {
 	width: 100%;
 	height: 100%;
 	z-index: 60;
-	
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	-ms-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
 }
 
 #menu-group-inner {
@@ -224,6 +311,7 @@ body {
 	
 	> li.menu-list {
 		position: absolute;
+		z-index: 60;
 		width: 200px;
 		height: 100px;
 		overflow: hidden;
@@ -316,6 +404,7 @@ body {
 			}
 		}
 		
+		&.static,
 		&:hover {
 			> div.img, > div.list {
 				opacity: 1;
@@ -349,6 +438,7 @@ body {
 			height: 30px;
 		}
 		
+		&.static,
 		&:hover {
 			transform: translate3d(-550px, 40px,0);
 			-webkit-transform: translate3d(-550px, 40px,0);
@@ -398,6 +488,7 @@ body {
 			height: 30px;
 		}
 		
+		&.static,
 		&:hover {
 			transform: translate3d(250px, 40px,0);
 			-webkit-transform: translate3d(250px, 40px,0);
@@ -447,6 +538,7 @@ body {
 			height: 60px;
 		}
 		
+		&.static,
 		&:hover {
 			transform: translate3d(-450px, 360px,0);
 			-webkit-transform: translate3d(-450px, 360px,0);
@@ -501,6 +593,7 @@ body {
 			}
 		}
 		
+		&.static,
 		&:hover {
 			transform: translate3d(150px, 360px,0);
 			-webkit-transform: translate3d(150px, 360px,0);

@@ -17,7 +17,7 @@
 	  ;
 	GLonly.resize_window = function(){
   		var height = $(document.body).height()
-  		  , $body = $('#body')
+  		  , $body = $('#menu-group')
   		  , $header = $('#header')
   		  , iframeWin = $('.fancybox-iframe').get(0)
   		  , scale
@@ -32,7 +32,7 @@
   			$body.css({
   				transform: "translate(0,-" + y + "px) scale(" + scale + "," + scale + ")"
   			});
-  			y = y * 0.9 - 29.5;
+  			y = y * 0.9;
   			$header.css({
   				transform: "translate(0,-" + y + "px) scale(" + scale + "," + scale + ")"
   			});
@@ -60,23 +60,58 @@
 	GLonly.network = {
 		
 	};
+	GLonly.start = function(){
+		GLonly.init.draw_line.call(GLonly, function(){
+			$('html').addClass('jf-finish');
+		});
+	};
 	GLonly.init = {
 		page: function(){
 		  		console.log('exec init page');
-		  		var menu_tap;
+		  		var menu_tap
+		  		  , $wrapper = $('#wrapper');
 		  		$(document).on('touchmove', function(e) { 
 					e.preventDefault();
 					e.stopPropagation();
 				});
-				GLonly.init.draw_line.call(this);
+				$(document.body).css('overflow', 'hidden');
+				$('#menu-list a').on('click', function(e){
+					var $this = $(this)
+					  , page_id = $this.attr('page-id')
+					  ;
+					switch(page_id){
+						case "event-page":
+							$('#page-group').css('left', '0px');
+							$('#'+page_id).addClass('static')
+								.find('.page-body-inner').TJScroll({
+								enabled:true,
+								hScroll:false,
+								vScroll:true,
+								hScrollbar:false,
+								vScrollbar:true,
+								bounceLock: true
+							});
+							break;
+						default:
+							break;
+					}
+					return false;
+				});
 				if(ieflag.ie){
 					GLonly.init.ie_page.call(this);
 				}
+				setTimeout(function(){
+					if( $('html').hasClass('jf-loading') ){
+						return setTimeout(arguments.callee,1000/30);
+					}
+					GLonly.start.call(GLonly);
+				},1000/30);
 			},
 		traditional_page: function(){
 		  		console.log('exec init traditional page');
 			},
-		draw_line: function(){
+		draw_line: function(callback){
+				callback = callback || function(){};
 				var $d = $('#drawings-group-inner')
 				  , width = $d.width()
 				  , height = $d.height()
@@ -140,7 +175,7 @@
 				  , right_bottom_paths = []
 				  ;
 				var point_animate_seq = function(paths, points, i){
-					if( i >= points.length - 1) return ;
+					if( i >= points.length - 1) return callback.call();
 					if( points[i].delay !== undefined && points[i].delay ){
 						setTimeout(function(){
 							point_animate_seq(paths, points, i);

@@ -20,6 +20,8 @@
 	<![endif]-->
 	<!--[if gte IE 9]><!--><script src="js/normal.min.js"></script><!--<![endif]-->
 	<!--[if gte IE 8]><!-->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.TJScroll.js"></script>
 	<script src="js/app2.js"></script>
 	<!--<![endif]-->
 </head>
@@ -45,7 +47,7 @@
 					<div id="center-logo"></div>
 					<nav>
 						<ul id="menu-list">
-							<li class="menu-list list-event">
+							<li class="menu-list list-event static">
 								<div class="bg"></div>
 								<div class="img"></div>
 								<div class="text">
@@ -54,11 +56,9 @@
 								</div>
 								<div class="list">
 									<ul class="menu-sublist">
-										<li>
-											<a class="list" href="">活動資訊</a>
-										</li>
-										<li><a class="list" href="">售票/入場</a></li>
-										<li><a class="list" href="">場地位置</a></li>
+										<li><a page-id="event-page" class="list" href="">活動資訊</a></li>
+										<li><a page-id="event-page" class="list" href="">售票/入場</a></li>
+										<li><a page-id="event-page" class="list" href="">場地位置</a></li>
 									</ul>
 								</div>
 							</li>
@@ -114,16 +114,25 @@
 				</div>
 			</div>
 			<div id="page-group">
-				<div id="page-group-inner">
-					<div class="page-content">
-						<div class="page-content-inner">
-							
+				<div id="event-page" class="page-content">
+					<div class="page-content-inner">
+						<div class="page-container">
+							<div class="page-header">
+								<h3>活動資訊</h3>
+							</div>
+							<div class="page-body">
+								<div class="page-body-inner">
+									<p>表形軍展及了戰點他弟面後公事起代再起；文式了多以要微世第不之才工麼平朋道終著。入只傳嗎我談排……案觀兩王服身不水，斷紙山，子可優要血且安代的：接那什面快她時第外時。軍了久，中術解麼卻金我解顧政時合驗看正策我可像大小連有人些一政錢雜亞包。院但必多位界市居業許樣歷縣果一過看點業有色作濟觀動樂角為愛物作城念。前裡到。非響外代人答我為少到過技張可，人後家必；的防兒式西區遠住，去道之因性、設資喜行福她希那創十指今，手今加要省，受或門管景答保天們四速規負觀要成我出……陸新排：地做弟第點國門確商，企長歷於，不後年作市不？不所先進克旅麼滿是在再素運自手白而拿？</p>
+									<p>表形軍展及了戰點他弟面後公事起代再起；文式了多以要微世第不之才工麼平朋道終著。入只傳嗎我談排……案觀兩王服身不水，斷紙山，子可優要血且安代的：接那什面快她時第外時。軍了久，中術解麼卻金我解顧政時合驗看正策我可像大小連有人些一政錢雜亞包。院但必多位界市居業許樣歷縣果一過看點業有色作濟觀動樂角為愛物作城念。前裡到。非響外代人答我為少到過技張可，人後家必；的防兒式西區遠住，去道之因性、設資喜行福她希那創十指今，手今加要省，受或門管景答保天們四速規負觀要成我出……陸新排：地做弟第點國門確商，企長歷於，不後年作市不？不所先進克旅麼滿是在再素運自手白而拿？</p>
+									<p>表形軍展及了戰點他弟面後公事起代再起；文式了多以要微世第不之才工麼平朋道終著。入只傳嗎我談排……案觀兩王服身不水，斷紙山，子可優要血且安代的：接那什面快她時第外時。軍了久，中術解麼卻金我解顧政時合驗看正策我可像大小連有人些一政錢雜亞包。院但必多位界市居業許樣歷縣果一過看點業有色作濟觀動樂角為愛物作城念。前裡到。非響外代人答我為少到過技張可，人後家必；的防兒式西區遠住，去道之因性、設資喜行福她希那創十指今，手今加要省，受或門管景答保天們四速規負觀要成我出……陸新排：地做弟第點國門確商，企長歷於，不後年作市不？不所先進克旅麼滿是在再素運自手白而拿？</p>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="circle-content">
-						<div class="circle-inner-content">
-							
-						</div>
+				</div>
+				<div class="circle-content">
+					<div class="circle-inner-content">
+						
 					</div>
 				</div>
 			</div>
@@ -138,20 +147,20 @@
 				</div>
 			</div>
 		</div>
-		<footer>
-			<div id="footer">
-				<div id="footer-inner">
-					<div id="copyright">
-						All rights reserved. &copy; 百合Only籌備處 2013
-					</div>
-					<ul id="footer-link">
-						<li><a rel="fancybox-iframe" href="privacy2.html">隱私權政策 Privacy Policies</a></li>
-						<li class="last"><a rel="fancybox-iframe" href="credits.html">Credits</a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
 	</div>
+	<footer>
+		<div id="footer">
+			<div id="footer-inner">
+				<div id="copyright">
+					All rights reserved. &copy; 百合Only籌備處 2013
+				</div>
+				<ul id="footer-link">
+					<li><a rel="fancybox-iframe" href="privacy2.html">隱私權政策 Privacy Policies</a></li>
+					<li class="last"><a rel="fancybox-iframe" href="credit.html">Credit</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
 <script type="text/javascript">window.jfAsyncInit=function(){jf.main({'appId':'e2510f16VwT5XHbraM7MKTaHR3qT2MdKu1jBGGtTppUF0K0R_uDa3ktbQ7mcNDOyCPJtSCY4MOtOxSWjB4pAJ8rT6ca9tUuIPML9PaiaaJPtH96PgsgSdZc8UlOyysfDDv8VwTLKRnzuQjDTRAKZntVGZvG3BX7k2-IZ5-qbaGQuGkL9-mo=','p':'9094','font':{'xingothic-tc-w4':{'css':{'0':'.xingothic-tc-w4'},'alias':'xingothic-tc-w4'},'xingothic-tc-w8':{'css':{'0':'.xingothic-tc-w8'},'alias':'xingothic-tc-w8'},'xingothic-tc-w6':{'css':{'0':'.xingothic-tc-w6'},'alias':'xingothic-tc-w6'}}})};(function(){var c={'scriptTimeout':3000};var h=document.getElementsByTagName("html")[0];h.className+=" jf-loading";var e=setTimeout(function(){h.className=h.className.replace(/(\s|^)jf-loading(\s|$)/g," ");h.className+=" jf-inactive"},c.scriptTimeout);var jfscript=document.createElement("script");var d=false;jfscript.type="text/javascript";jfscript.async=true;jfscript.src='http://ds.justfont.com/js/stable/v/1.13/';jfscript.onload=jfscript.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded"){return}d=true;clearTimeout(e)};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(jfscript,s)})();</script>
 <!--<![endif]-->
 <!--[if lte IE 7]>
