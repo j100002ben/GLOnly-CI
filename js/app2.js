@@ -78,19 +78,32 @@
 				$('#menu-list a').on('click', function(e){
 					var $this = $(this)
 					  , page_id = $this.attr('page-id')
+					  , $page, $page_inner, tjscroll
 					  ;
 					switch(page_id){
 						case "event-page":
 							$('#page-group').css('left', '0px');
-							$('#'+page_id).addClass('static')
-								.find('.page-body-inner').TJScroll({
-								enabled:true,
-								hScroll:false,
-								vScroll:true,
-								hScrollbar:false,
-								vScrollbar:true,
-								bounceLock: true
+							$page = $('#'+page_id).addClass('static');
+							$page.find('.page-header-back').one('click', function(){
+								$page.removeClass('static');
+								setTimeout(function(){
+									$('#page-group').css('left', '100%');
+								}, 1000);
+								return false;
 							});
+							$page_inner = $page.find('.page-body-inner');
+							if( tjscroll = $page_inner.data('TJScroll') ){
+								tjscroll.refresh.call(tjscroll);
+							}else{
+								$page_inner.TJScroll({
+									enabled:true,
+									hScroll:false,
+									vScroll:true,
+									hScrollbar:false,
+									vScrollbar:true,
+									bounceLock: true
+								});
+							}
 							break;
 						default:
 							break;
